@@ -1,18 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Tasks from './Components/Tasks/tasks'
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state ={
+      project: []
+    }
+  }
+
+  getTask(){
+    console.log("getting the tasks")
+    this.setState({project: [
+      {
+        title: 'Business website',
+        category: 'web Design'
+      },
+      {
+        title: 'Social App',
+        category: 'mobile App'
+      },
+      {
+        title: 'Business shopping cart',
+        category: 'web Developent'
+      }
+    ]});
+  }
+  componentWillMount(){
+    this.getTask();
+  }
+
   render() {
+    console.log(this.state.project)
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Tasks tasks={this.state.project}/>
       </div>
     );
   }
