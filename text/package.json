@@ -3,11 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "prop-types": "^15.6.1",
-=======
     "history": "^4.6.3",
->>>>>>> 6f28655787342ebc05c2e49b0a62e76110d16a61
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1",
