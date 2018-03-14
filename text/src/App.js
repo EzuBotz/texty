@@ -1,41 +1,64 @@
 import React, { Component } from 'react';
-import Tasks from './Components/Tasks/tasks'
+import Tasks from './Components/Tasks/tasks';
+import Project from './Components/Tasks/project'
 import './App.css';
 
 class App extends Component {
   constructor(){
     super()
     this.state ={
-      project: []
+      project: [],
+      task: []
     }
   }
 
   getTask(){
     console.log("getting the tasks")
-    this.setState({project: [
+    return [
       {
-        title: 'Business website',
+        title: 'task 1 ',
         category: 'web Design'
       },
       {
-        title: 'Social App',
+        title: 'task 2',
         category: 'mobile App'
       },
       {
-        title: 'Business shopping cart',
+        title: 'task 3',
         category: 'web Developent'
+      }
+    ];
+  }
+
+  getProject(){
+    console.log("getting the tasks")
+    this.setState({project: [
+      {
+        title: 'Business website',
+        category: 'web Design',
+        task: this.getTask()
+      },
+      {
+        title: 'Social App',
+        category: 'mobile App',
+        task: this.getTask()
+      },
+      {
+        title: 'Business shopping cart',
+        category: 'web Developent',
+        task: this.getTask()
       }
     ]});
   }
   componentWillMount(){
     this.getTask();
+    this.getProject();
   }
 
   render() {
-    console.log(this.state.project)
     return (
       <div className="App">
-        <Tasks tasks={this.state.project}/>
+        <Project projects={this.state.project}/>
       </div>
     );
   }

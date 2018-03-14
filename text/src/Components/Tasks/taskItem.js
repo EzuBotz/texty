@@ -7,6 +7,8 @@ class taskItem extends Component {
     return (
       <li>
         <strong>{this.props.task.title}</strong>
+        <br />
+        {this.props.task.category}
       </li>
     );
   }
