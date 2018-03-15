@@ -1,7 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { Provider } from 'react-redux';
+import { store } from './Components/Login/helpers';
+import { App } from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+// setup fake backend
+import { configureFakeBackend } from './Components/Login/helpers';
+configureFakeBackend();
+
+function render (){
+  ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,    document.getElementById('root')
+  );
+
+}
+store.subscribe(render);
+render();

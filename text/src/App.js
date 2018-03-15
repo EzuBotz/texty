@@ -1,67 +1,54 @@
-import React, { Component } from 'react';
-import Tasks from './Components/Tasks/tasks';
-import Project from './Components/Tasks/project'
-import './App.css';
+import React from 'react';
+import { Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { history } from './Components/Login/helpers';
+import { alertActions } from './Components/Login/actions';
+import { PrivateRoute } from './Components/Login/components';
+import { HomePage } from './Components/Login/HomePage';
+import { LoginPage } from './Components/Login/LoginPage';
+import { RegisterPage } from './Components/Login/RegisterPage';
 
-class App extends Component {
-  constructor(){
-    super()
-    this.state ={
-      project: [],
-      task: []
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        const { dispatch } = this.props;
+        history.listen((location, action) => {
+            // clear alert on location change
+            dispatch(alertActions.clear());
+        });
     }
-  }
 
-  getTask(){
-    console.log("getting the tasks")
-    return [
-      {
-        title: 'task 1 ',
-        category: 'web Design'
-      },
-      {
-        title: 'task 2',
-        category: 'mobile App'
-      },
-      {
-        title: 'task 3',
-        category: 'web Developent'
-      }
-    ];
-  }
-
-  getProject(){
-    console.log("getting the tasks")
-    this.setState({project: [
-      {
-        title: 'Business website',
-        category: 'web Design',
-        task: this.getTask()
-      },
-      {
-        title: 'Social App',
-        category: 'mobile App',
-        task: this.getTask()
-      },
-      {
-        title: 'Business shopping cart',
-        category: 'web Developent',
-        task: this.getTask()
-      }
-    ]});
-  }
-  componentWillMount(){
-    this.getTask();
-    this.getProject();
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <Project projects={this.state.project}/>
-      </div>
-    );
-  }
+    render() {
+        const { alert } = this.props;
+        return (
+            <div className="jumbotron">
+                <div className="container">
+                    <div className="col-sm-8 col-sm-offset-2">
+                        {alert.message && <div className={`alert ${alert.type}`}>{alert.message}</div>
+                        }
+                        <Router history={history}>
+                            <div>
+                                <PrivateRoute exact path="/" component={HomePage}/>
+                                <Route path="/login" component={LoginPage}/>
+                                <Route path="/register" component={RegisterPage}/>
+                            </div>
+                        </Router>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
-export default App;
+function mapStateToProps(state) {
+    const { alert } = state;
+    return {
+        alert
+    };
+}
+
+const connectedApp = connect(mapStateToProps)(App);
+export { connectedApp as App };
+
+export * from './App';
