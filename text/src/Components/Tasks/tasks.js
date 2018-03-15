@@ -13,10 +13,17 @@ class Task extends Component {
         );
       });
     }
+    else {
+      return (
+        tasks = <p> Sorry no task for this project</p>
+      )
+    }
     return (
       <div className="tasks">
         <h3>Tasks</h3>
-        {tasks}
+        <ul>
+          {tasks}
+        </ul>
       </div>
     );
   }
