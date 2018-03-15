@@ -1,7 +1,6 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { history } from './Components/Login/helpers';
 import { alertActions } from './Components/Login/actions';
 import { PrivateRoute } from './Components/Login/components';
