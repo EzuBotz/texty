@@ -17,7 +17,7 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch('/users/authenticate', requestOptions)
+    return fetch('http://127.0.0.1:5000/login', requestOptions)
         .then(response => {
             if (!response.ok) {
                 return Promise.reject(response.statusText);
